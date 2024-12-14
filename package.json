@@ -1,0 +1,16 @@
+{
+  "name": "react-scoped-hooks-monorepo",
+  "private": true,
+  "scripts": {
+    "build": "nx run-many --target=build",
+    "test": "nx run-many --target=test",
+    "lint": "nx run-many --target=lint",
+    "dev": "nx run example-app:dev"
+  },
+  "devDependencies": {
+		"@types/react": "^19.0.1",
+		"@types/react-dom": "^19.0.1",
+    "nx": "^17.2.0",
+    "typescript": "^5.3.3"
+  }
+} 

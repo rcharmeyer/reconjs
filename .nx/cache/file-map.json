@@ -1,0 +1,114 @@
+{
+  "version": "6.0",
+  "nxVersion": "17.3.2",
+  "deps": {
+    "@types/react": "^19.0.1",
+    "@types/react-dom": "^19.0.1",
+    "nx": "^17.2.0",
+    "typescript": "^5.3.3"
+  },
+  "pathMappings": {},
+  "nxJsonPlugins": [],
+  "pluginsConfig": {
+    "@nx/js": {
+      "analyzeSourceFiles": false
+    }
+  },
+  "fileMap": {
+    "nonProjectFiles": [
+      {
+        "file": "package.json",
+        "hash": "10071099682770271320"
+      },
+      {
+        "file": "README.md",
+        "hash": "10252472217699653149"
+      },
+      {
+        "file": "pnpm-lock.yaml",
+        "hash": "17184988524149508595"
+      },
+      {
+        "file": "nx.json",
+        "hash": "12114744405300960577"
+      },
+      {
+        "file": "pnpm-workspace.yaml",
+        "hash": "7681509393527711264"
+      },
+      {
+        "file": "tsconfig.json",
+        "hash": "1582904080995249572"
+      },
+      {
+        "file": ".gitignore",
+        "hash": "17583015395016671738"
+      }
+    ],
+    "projectFileMap": {
+      "react-scoped-hooks": [
+        {
+          "file": "packages/react-scoped-hooks/.eslintrc.json",
+          "hash": "2563122482876188705"
+        },
+        {
+          "file": "packages/react-scoped-hooks/package.json",
+          "hash": "16697920928597757005"
+        },
+        {
+          "file": "packages/react-scoped-hooks/src/index.tsx",
+          "hash": "10820491022715270904"
+        },
+        {
+          "file": "packages/react-scoped-hooks/tsconfig.json",
+          "hash": "16240118069014594970"
+        }
+      ],
+      "example-app": [
+        {
+          "file": "packages/example-app/.eslintrc.json",
+          "hash": "3482246696575532376"
+        },
+        {
+          "file": "packages/example-app/index.html",
+          "hash": "10378852891194701493"
+        },
+        {
+          "file": "packages/example-app/package.json",
+          "hash": "10995661895489549054",
+          "deps": [
+            "react-scoped-hooks"
+          ]
+        },
+        {
+          "file": "packages/example-app/postcss.config.js",
+          "hash": "1468484466662653169"
+        },
+        {
+          "file": "packages/example-app/src/App.tsx",
+          "hash": "9422839093701547745"
+        },
+        {
+          "file": "packages/example-app/src/index.css",
+          "hash": "17713324658131714097"
+        },
+        {
+          "file": "packages/example-app/src/main.tsx",
+          "hash": "15799292709187263901"
+        },
+        {
+          "file": "packages/example-app/tailwind.config.js",
+          "hash": "753248411632227321"
+        },
+        {
+          "file": "packages/example-app/tsconfig.json",
+          "hash": "14770344717239278500"
+        },
+        {
+          "file": "packages/example-app/vite.config.ts",
+          "hash": "9878591853894573904"
+        }
+      ]
+    }
+  }
+}
