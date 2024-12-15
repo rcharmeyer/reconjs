@@ -1,22 +1,25 @@
 import './index.css'
 
-import React from 'react'
+import { StrictMode } from 'react'
 import ReactDOM from 'react-dom/client'
-import { App } from './main'
+import { App } from './product'
 
-import { RootProvider, ScopeProvider } from 'react-scoped-hooks'
+import { RootProvider } from 'react-scoped-hooks'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 
 const queryClient = new QueryClient()
 
+RootProvider.attach (StrictMode)
+RootProvider.attach (({ children }) => {
+	return (
+		<QueryClientProvider client={queryClient}>
+			{children}
+		</QueryClientProvider>
+	)
+})
+
 ReactDOM.createRoot (document.getElementById('root')!).render(
-  <React.StrictMode>
-		<ScopeProvider>
-			<QueryClientProvider client={queryClient}>
-				<RootProvider>
-					<App />
-				</RootProvider>
-			</QueryClientProvider>
-		</ScopeProvider>
-  </React.StrictMode>,
-) 
+	<RootProvider>
+		<App />
+	</RootProvider>
+)

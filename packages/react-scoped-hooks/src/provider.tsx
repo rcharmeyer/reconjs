@@ -7,22 +7,22 @@ import {
 	PropsWithChildren,
 } from "react"
 
-type Wrapper = MemoExoticComponent <ComponentType <PropsWithChildren>>
+type Wrapper = ComponentType <PropsWithChildren>
 
-type HoistedProvider = Wrapper & {
+type HoistedProvider = MemoExoticComponent <Wrapper> & {
 	attach: (provider: Wrapper) => void
 }
 
 export function createProvider (displayName: string) {
 	let locked = false
-	const providers = [] as Wrapper[]
+	const wrappers = [] as Wrapper[]
 
 	function HoistedProvider (props: PropsWithChildren) {
 		locked = true
 		let res = props.children
 
-		for (const InnerProvider of providers) {
-			res = <InnerProvider>{res}</InnerProvider>
+		for (const Wrapper of wrappers) {
+			res = <Wrapper>{res}</Wrapper>
 		}
 
 		return res
@@ -37,7 +37,7 @@ export function createProvider (displayName: string) {
 			return
 		}
 		
-		providers.unshift (provider)
+		wrappers.unshift (provider)
 	}
 	return res as HoistedProvider
 }
