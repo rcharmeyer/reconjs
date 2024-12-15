@@ -17,6 +17,18 @@
   "fileMap": {
     "nonProjectFiles": [
       {
+        "file": "nx.json",
+        "hash": "12114744405300960577"
+      },
+      {
+        "file": "pnpm-lock.yaml",
+        "hash": "6277736471513613629"
+      },
+      {
+        "file": "pnpm-workspace.yaml",
+        "hash": "7681509393527711264"
+      },
+      {
         "file": "package.json",
         "hash": "10071099682770271320"
       },
@@ -25,45 +37,15 @@
         "hash": "10252472217699653149"
       },
       {
-        "file": "pnpm-lock.yaml",
-        "hash": "17184988524149508595"
-      },
-      {
-        "file": "nx.json",
-        "hash": "12114744405300960577"
-      },
-      {
-        "file": "pnpm-workspace.yaml",
-        "hash": "7681509393527711264"
-      },
-      {
         "file": "tsconfig.json",
         "hash": "1582904080995249572"
       },
       {
         "file": ".gitignore",
-        "hash": "17583015395016671738"
+        "hash": "13164734238322643137"
       }
     ],
     "projectFileMap": {
-      "react-scoped-hooks": [
-        {
-          "file": "packages/react-scoped-hooks/.eslintrc.json",
-          "hash": "2563122482876188705"
-        },
-        {
-          "file": "packages/react-scoped-hooks/package.json",
-          "hash": "16697920928597757005"
-        },
-        {
-          "file": "packages/react-scoped-hooks/src/index.tsx",
-          "hash": "10820491022715270904"
-        },
-        {
-          "file": "packages/react-scoped-hooks/tsconfig.json",
-          "hash": "16240118069014594970"
-        }
-      ],
       "example-app": [
         {
           "file": "packages/example-app/.eslintrc.json",
@@ -71,11 +53,11 @@
         },
         {
           "file": "packages/example-app/index.html",
-          "hash": "10378852891194701493"
+          "hash": "5503672409809994258"
         },
         {
           "file": "packages/example-app/package.json",
-          "hash": "10995661895489549054",
+          "hash": "15582395994467638574",
           "deps": [
             "react-scoped-hooks"
           ]
@@ -85,16 +67,16 @@
           "hash": "1468484466662653169"
         },
         {
-          "file": "packages/example-app/src/App.tsx",
-          "hash": "9422839093701547745"
-        },
-        {
           "file": "packages/example-app/src/index.css",
           "hash": "17713324658131714097"
         },
         {
+          "file": "packages/example-app/src/index.tsx",
+          "hash": "6170317399173885424"
+        },
+        {
           "file": "packages/example-app/src/main.tsx",
-          "hash": "15799292709187263901"
+          "hash": "13532658777931204856"
         },
         {
           "file": "packages/example-app/tailwind.config.js",
@@ -107,6 +89,52 @@
         {
           "file": "packages/example-app/vite.config.ts",
           "hash": "9878591853894573904"
+        },
+        {
+          "file": "packages/example-app/src/color-selector.tsx",
+          "hash": "5210625025182225647"
+        },
+        {
+          "file": "packages/example-app/src/product-queries.tsx",
+          "hash": "158368440905666499"
+        },
+        {
+          "file": "packages/example-app/src/providers.tsx",
+          "hash": "8367495762647518228"
+        },
+        {
+          "file": "packages/example-app/src/image-gallery.tsx",
+          "hash": "8875260261295016967"
+        }
+      ],
+      "react-scoped-hooks": [
+        {
+          "file": "packages/react-scoped-hooks/.eslintrc.json",
+          "hash": "2563122482876188705"
+        },
+        {
+          "file": "packages/react-scoped-hooks/package.json",
+          "hash": "9496742695027279579"
+        },
+        {
+          "file": "packages/react-scoped-hooks/src/index.tsx",
+          "hash": "9635542325385376970"
+        },
+        {
+          "file": "packages/react-scoped-hooks/src/symbolizer.ts",
+          "hash": "2373728746070865531"
+        },
+        {
+          "file": "packages/react-scoped-hooks/tsconfig.json",
+          "hash": "16240118069014594970"
+        },
+        {
+          "file": "packages/react-scoped-hooks/src/scoped-hooks.tsx",
+          "hash": "15391851608551957684"
+        },
+        {
+          "file": "packages/react-scoped-hooks/src/provider.tsx",
+          "hash": "10612290074245612710"
         }
       ]
     }

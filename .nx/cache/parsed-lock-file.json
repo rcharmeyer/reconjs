@@ -1044,6 +1044,24 @@
         "hash": "sha512-+Fj43pSMwJs4KRrH/938Uf+uAELIgVBmQzg/q1YG10djyfA3TnrU8N8XzqCh/okZdszqBQTZf96idMfE5lnwTA=="
       }
     },
+    "npm:@tanstack/query-core@5.62.7": {
+      "type": "npm",
+      "name": "npm:@tanstack/query-core@5.62.7",
+      "data": {
+        "version": "@tanstack/query-core@5.62.7",
+        "packageName": "@tanstack/query-core@5.62.7",
+        "hash": "sha512-fgpfmwatsrUal6V+8EC2cxZIQVl9xvL7qYa03gsdsCy985UTUlS4N+/3hCzwR0PclYDqisca2AqR1BVgJGpUDA=="
+      }
+    },
+    "npm:@tanstack/react-query@5.62.7": {
+      "type": "npm",
+      "name": "npm:@tanstack/react-query@5.62.7",
+      "data": {
+        "version": "@tanstack/react-query@5.62.7",
+        "packageName": "@tanstack/react-query@5.62.7",
+        "hash": "sha512-+xCtP4UAFDTlRTYyEjLx0sRtWyr5GIk7TZjZwBu4YaNahi3Rt2oMyRqfpfVrtwsqY2sayP4iXVCwmC+ZqqFmuw=="
+      }
+    },
     "npm:@types/babel__core@7.20.5": {
       "type": "npm",
       "name": "npm:@types/babel__core@7.20.5",
@@ -1098,15 +1116,6 @@
         "hash": "sha512-5+fP8P8MFNC+AyZCDxrB2pkZFPGzqQWUzpSeuuVLvm8VMcorNYavBqoFcxK8bQz4Qsbn4oUEEem4wDLfcysGHA=="
       }
     },
-    "npm:@types/prop-types@15.7.14": {
-      "type": "npm",
-      "name": "npm:@types/prop-types@15.7.14",
-      "data": {
-        "version": "@types/prop-types@15.7.14",
-        "packageName": "@types/prop-types@15.7.14",
-        "hash": "sha512-gNMvNH49DJ7OJYv+KAKn0Xp45p8PLl6zo2YnvDIbTd4J6MER2BmWN49TG7n9LvkyihINxeKW8+3bfS2yDC9dzQ=="
-      }
-    },
     "npm:@types/react-dom@19.0.2": {
       "type": "npm",
       "name": "npm:@types/react-dom@19.0.2",
@@ -1114,15 +1123,6 @@
         "version": "@types/react-dom@19.0.2",
         "packageName": "@types/react-dom@19.0.2",
         "hash": "sha512-c1s+7TKFaDRRxr1TxccIX2u7sfCnc3RxkVyBIUA2lCpyqCF+QoAwQ/CBg7bsMdVwP120HEH143VQezKtef5nCg=="
-      }
-    },
-    "npm:@types/react@18.3.16": {
-      "type": "npm",
-      "name": "npm:@types/react@18.3.16",
-      "data": {
-        "version": "@types/react@18.3.16",
-        "packageName": "@types/react@18.3.16",
-        "hash": "sha512-oh8AMIC4Y2ciKufU8hnKgs+ufgbA/dhPTACaZPM86AbwX9QwnFtSoPWEeRUj8fge+v6kFt78BXcDhAU1SrrAsw=="
       }
     },
     "npm:@types/react@19.0.1": {
@@ -2889,15 +2889,6 @@
         "hash": "sha512-8XPvpAA8uyhfteu8pIvQxpJZ7SYYdpUivZpGy6sFsBuKRY/7rQGavedeB8aK+Zkyq6upMFVL/9AW6vOYzfRyLg=="
       }
     },
-    "npm:loose-envify@1.4.0": {
-      "type": "npm",
-      "name": "npm:loose-envify@1.4.0",
-      "data": {
-        "version": "loose-envify@1.4.0",
-        "packageName": "loose-envify@1.4.0",
-        "hash": "sha512-lyuxPGr/Wfhrlem2CL/UcnUc1zcqKAImBDzukY7Y5F/yQiNdko6+fRLevlw1HgMySw7f611UIY408EtxRSoK3Q=="
-      }
-    },
     "npm:loupe@2.3.7": {
       "type": "npm",
       "name": "npm:loupe@2.3.7",
@@ -3544,15 +3535,6 @@
         "version": "react-refresh@0.14.2",
         "packageName": "react-refresh@0.14.2",
         "hash": "sha512-jCvmsr+1IUSMUyzOkRcvnVbX3ZYC6g9TDrDbFuFmRDq7PD4yaGbLKNQL6k2jnArV8hjYxh7hVhAZB6s9HDGpZA=="
-      }
-    },
-    "npm:react@18.3.1": {
-      "type": "npm",
-      "name": "npm:react@18.3.1",
-      "data": {
-        "version": "react@18.3.1",
-        "packageName": "react@18.3.1",
-        "hash": "sha512-wS+hAgJShR0KhEvPJArfuPVN1+Hz1t0Y6n5jLrGQbkb4urgPE/0Rve+1kMB1v/oWgHgm4WIcV+i7F2pTVj+2iQ=="
       }
     },
     "npm:react@19.0.0": {
