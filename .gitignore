@@ -3,5 +3,4 @@ build
 .DS_Store
 .env
 .env.*
-.nx/cache
 .next
