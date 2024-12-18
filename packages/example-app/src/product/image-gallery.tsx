@@ -1,19 +1,24 @@
 import { use, useMemo } from 'react'
-import { defineContext } from 'react-scoped-hooks'
+import { defineContext } from '@reconjs/react'
 
-import { useProductImages } from './product-queries'
-import { ColorStateContext } from './color-selector'
-import { ProductProvider } from './providers'
+import { loadImages } from './queries'
+import { theColorState } from './color-selector'
+import { theProduct } from './context'
 
-const ActiveImageContext = defineContext ("ActiveImage", () => {
-	const images = useProductImages()
-	const { color } = use (ColorStateContext)
+const theActiveImage = defineContext (() => {
+	const product = use (theProduct)
+	const images = use (loadImages (product))
+
+
+	const { color } = use (theColorState)
 	return useMemo (() => {
 		return images[color] ?? null
 	}, [ color ])
-}, [ ProductProvider ])
+}, [ theProduct ])
+
+theActiveImage.displayName = "theActiveImage"
 
 export function ImageGallery () {
-	const image = use (ActiveImageContext)
+	const image = use (theActiveImage)
 	return <img src={image} alt="Product" />
 }

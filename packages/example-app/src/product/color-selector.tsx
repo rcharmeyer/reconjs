@@ -1,16 +1,19 @@
 import { use, useState } from 'react'
-import { defineContext } from 'react-scoped-hooks'
-import { Color, useProductColors } from './product-queries'
-import { ProductProvider } from './providers'
+import { defineContext } from '@reconjs/react'
+import { Color, loadColors } from './queries'
+import { theProduct } from './context'
 
-export const ColorStateContext = defineContext ("ColorState", () => {
-	const [ defaultColor ] = useProductColors()
-	const [ color, setColor ] = useState <Color> (defaultColor)
+export const theColorState = defineContext (() => {
+	const product = use (theProduct)
+	const [ defaultColor ] = use (loadColors (product))
+	const [ color, setColor ] = useState (defaultColor)
 	return { color, setColor }
-}, [ ProductProvider ])
+}, [ theProduct ])
+
+theColorState.displayName = "theColorState"
 
 function ColorSelectorItem (props: { color: Color }) {
-	const { setColor } = use (ColorStateContext)
+	const { setColor } = use (theColorState) ?? {}
 
 	function onClick () {
 		setColor (props.color)
@@ -24,7 +27,8 @@ function ColorSelectorItem (props: { color: Color }) {
 }
 
 export function ColorSelector () {
-	const colors = useProductColors()
+	const product = use (theProduct)
+	const colors = use (loadColors (product))
 	return (
 		<div className="flex flex-row gap-4">
 			{colors.map (color => <ColorSelectorItem key={color} color={color} />)}

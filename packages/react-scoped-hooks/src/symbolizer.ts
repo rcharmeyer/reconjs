@@ -43,6 +43,8 @@ export function createSymbolizer() {
 	}
 }
 
+type Func1 = (arg: any) => any
+
 /**
  * Create a cache that can be used to store values.
  * 
@@ -53,12 +55,17 @@ export function createSymbolizer() {
  * const getInitialTimestamp = createCache (() => Date.now().utc())
  * getTimestamp ("user-4858") // always returns the same timestamp
  */
-export function createCache <T> (factory: () => T) {
-	const cache = new Map <any, T>()
+export function createCache <F extends Func1> (
+	factory: F
+) {
+	type A = Parameters <F> [0]
+	type T = ReturnType <F>
+
+	const cache = new Map <A, T>()
 
 	return function get (arg: any): T {
 		if (!cache.has (arg)) {
-			cache.set (arg, factory())
+			cache.set (arg, factory (arg))
 		}
 		// @ts-expect-error
 		return cache.get (arg)

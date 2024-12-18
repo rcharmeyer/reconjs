@@ -23,6 +23,9 @@ importers:
 
   packages/example-app:
     dependencies:
+      '@reconjs/react':
+        specifier: workspace:*
+        version: link:../react-scoped-hooks
       '@tanstack/react-query':
         specifier: ^5.62.7
         version: 5.62.7(react@19.0.0)
@@ -32,9 +35,6 @@ importers:
       react-dom:
         specifier: ^19.0.0
         version: 19.0.0(react@19.0.0)
-      react-scoped-hooks:
-        specifier: workspace:*
-        version: link:../react-scoped-hooks
     devDependencies:
       '@typescript-eslint/eslint-plugin':
         specifier: ^6.14.0
