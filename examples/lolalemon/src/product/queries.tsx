@@ -10,7 +10,7 @@ function getImageUrl (color: Color) {
 	return `https://picsum.photos/200/300?random=${color}`
 }
 
-export const loadColors = cache (async (product: string) => {
+export const loadColors = cache (async (_: string) => {
 	return [ Color.Red, Color.Green, Color.Blue ]
 })
 

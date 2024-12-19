@@ -1,5 +1,5 @@
 import { use, useCallback, useState } from "react"
-import { defineContext } from "@reconjs/react"
+import { defineContext, setDisplayNames } from "@reconjs/react"
 import { theProduct } from "./context"
 
 const theFavoritingStates = defineContext (() => {
@@ -20,8 +20,6 @@ const theFavoritingStates = defineContext (() => {
 	}
 }, [])
 
-theFavoritingStates.displayName = "theFavoritingStates"
-
 export const theFavoritingState = defineContext (() => {
 	const { favorites, addFavorite, removeFavorite } = use (theFavoritingStates)
 	const product = use (theProduct)
@@ -41,5 +39,4 @@ export const theFavoritingState = defineContext (() => {
 	}
 }, [ theProduct, theFavoritingStates ])
 
-theFavoritingState.displayName = "theFavoritingState"
-
+setDisplayNames ({ theFavoritingState, theFavoritingStates })

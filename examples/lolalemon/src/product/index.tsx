@@ -16,10 +16,10 @@ function ProductView () {
 export function App() {
   return (
     <div className="min-h-screen w-screen bg-gray-50 flex flex-col items-center justify-center gap-4">
-      <h1 className="text-2xl font-bold mb-4">React Scoped Hooks Example</h1>
+      <h1 className="text-2xl font-bold mb-4">Recon Example</h1>
 			<Provider context={theProduct} value="align-25">
 				<ProductView />
 			</Provider>
     </div>
   )
-} 
+}
