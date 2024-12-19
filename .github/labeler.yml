@@ -1,0 +1,4 @@
+'package: @reconj/react':
+  - 'packages/react/**/*'
+'documentation':
+  - 'docs/**/*'
