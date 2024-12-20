@@ -4,10 +4,12 @@ import React, {
 	memo, 
 	MemoExoticComponent, 
 	PropsWithChildren,
-	ReactNode,
-	use,
+	useMemo,
 } from "react"
+import { use } from "./use"
 import { createCache } from "./symbolizer"
+import { theRoot } from "./root"
+import { isRSC } from "./react-internals"
 
 type AnyDefined = Exclude <any, undefined>
 
@@ -19,10 +21,7 @@ type ChildProvider = MemoExoticComponent <
 	ComponentType <PropsWithChildren>
 >
 
-export const theRoot = createContext (null)
-theRoot.displayName = "theRoot"
-
-const dependentsOf = createCache ((_: Ctx) => {
+export const dependentsOf = createCache ((_: Ctx) => {
 	const list = [] as ChildProvider[]
 
 	let locked = false
@@ -41,60 +40,28 @@ const dependentsOf = createCache ((_: Ctx) => {
 	}
 })
 
-const getProvider = createCache ((ctx: Ctx) => {
-	return memo (ctx.Provider)
-})
-
-export function Provider <C extends Ctx> (props: {
-	children: React.ReactNode,
-	context: C,
-	value: React.ContextType <C>,
-}): ReactNode
-
-export function Provider <C extends Ctx> (props: {
-	children: React.ReactNode,
-	context: C,
-	value: React.ContextType <C>,
-}) {
-	if (!props.context) return props.children
-
-	const dependents = dependentsOf (props.context).get()
-	let { children } = props
-
-	for (const Wrapper of dependents) {
-		children = <Wrapper>{children}</Wrapper>
-	}
-
-	const Provider = getProvider (props.context)
-
-	return (
-		<Provider value={props.value}>
-			{children}
-		</Provider>
-	)
-}
-
-export function RootProvider (props: {
-	children: React.ReactNode,
-}) {
-	return (
-		<Provider context={theRoot} value={null}>
-			{props.children}
-		</Provider>
-	)
-}
-
 export function defineContext <T extends AnyDefined> (
 	useContextValue: () => T,
 	deps: Ctx[],
 ) {
+	if (isRSC()) {
+		throw new Error ("defineContext must be called in a client component.")
+	}
+
 	deps = [ theRoot, ...deps ]
+	for (const dep of deps) {
+		// @ts-expect-error
+		if (dep.defaultValue !== undefined) {
+			console.warn ("defineContext expects all dependencies to have undefined default values.")
+		}
+	}
+
 	const context = createContext <T> (undefined as any)
+	const ContextProvider = memo (context.Provider)
 
 	function HoistedContext (props: PropsWithChildren) {
 		const value = useContextValue()
 
-		const ContextProvider = getProvider (context)
 		return (
 			<ContextProvider value={value}>
 				{props.children}
@@ -105,8 +72,10 @@ export function defineContext <T extends AnyDefined> (
 	const MemoizedContext = memo (HoistedContext)
 
 	function HoistedProvider (props: PropsWithChildren) {
-		const inContexts = deps
-			.every (ctx => use (ctx) !== undefined)
+		const inContexts = useMemo (() => {
+			return deps
+				.every (ctx => use (ctx) !== undefined)
+		}, [])
 
 		if (!inContexts) return props.children
 
@@ -117,9 +86,9 @@ export function defineContext <T extends AnyDefined> (
 		)
 	}
 
-	const provider = memo (HoistedProvider)
+	const MemoizedProvider = memo (HoistedProvider)
 	for (const dep of deps) {
-		dependentsOf (dep).add (provider)
+		dependentsOf (dep).add (MemoizedProvider)
 	}
 
 	return context
