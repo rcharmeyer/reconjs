@@ -1,7 +1,6 @@
 {
   "name": "@reconjs/react",
   "version": "0.0.1",
-  "type": "module",
   "sideEffects": false,
   "repository": {
     "type": "git",
@@ -11,10 +10,20 @@
   "files": [
     "build"
   ],
+  "type": "module",
+  "types": "build/legacy/index.d.ts",
+  "main": "build/legacy/index.cjs",
+  "module": "build/legacy/index.js",
   "exports": {
     ".": {
-      "types": "./build/modern/index.d.ts",
-      "default": "./build/modern/index.js"
+      "import": {
+        "types": "./build/modern/index.d.ts",
+        "default": "./build/modern/index.js"
+      },
+      "require": {
+        "types": "./build/modern/index.d.cts",
+        "default": "./build/modern/index.cjs"
+      }
     },
     "./package.json": "./package.json"
   },
