@@ -7,7 +7,10 @@
     "dist"
   ],
   "exports": {
-    ".": "./src/index.tsx",
+    ".": {
+      "types": "./build/modern/index.d.ts",
+      "default": "./build/modern/index.js"
+    },
     "./package.json": "./package.json"
   },
   "scripts": {
