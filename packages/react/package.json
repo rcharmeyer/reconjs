@@ -3,6 +3,11 @@
   "version": "0.0.1",
   "type": "module",
   "sideEffects": false,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/rcharmeyer/reconjs.git",
+    "directory": "packages/react"
+  },
   "files": [
     "build"
   ],
