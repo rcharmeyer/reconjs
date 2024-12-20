@@ -19,7 +19,7 @@ function modernConfig(opts) {
     clean: true,
     esbuildPlugins: [
       // I don't know why this is breaking the build...
-      // @ts-expect-error
+      // @ts-ignore
       esbuildPluginFilePathExtensions({ esmExtension: 'js' })
     ],
   }
@@ -40,7 +40,7 @@ export function legacyConfig(opts) {
     sourcemap: true,
     clean: true,
     esbuildPlugins: [
-      // @ts-expect-error
+      // @ts-ignore
       esbuildPluginFilePathExtensions({ esmExtension: 'js' })
     ],
   }
