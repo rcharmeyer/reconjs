@@ -19,7 +19,28 @@ function modernConfig(opts) {
     clean: true,
     esbuildPlugins: [
       // I don't know why this is breaking the build...
-      // @ts-expect-error
+      // @ts-ignore
+      esbuildPluginFilePathExtensions({ esmExtension: 'js' })
+    ],
+  }
+}
+
+/**
+ * @param {Object} opts - Options for building configurations.
+ * @param {string[]} opts.entry - The entry array.
+ * @returns {import('tsup').Options}
+ */
+export function legacyConfig(opts) {
+  return {
+    entry: opts.entry,
+    format: ['cjs', 'esm'],
+    target: ['es2020', 'node16'],
+    outDir: 'build/legacy',
+    dts: true,
+    sourcemap: true,
+    clean: true,
+    esbuildPlugins: [
+      // @ts-ignore
       esbuildPluginFilePathExtensions({ esmExtension: 'js' })
     ],
   }
@@ -27,4 +48,5 @@ function modernConfig(opts) {
 
 export default defineConfig([
   modernConfig({ entry: ['src/*.ts', 'src/*.tsx'] }),
+  legacyConfig({ entry: ['src/*.ts', 'src/*.tsx'] })
 ])

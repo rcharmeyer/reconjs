@@ -8,7 +8,7 @@ import vitest from '@vitest/eslint-plugin'
 export default [
   ...tanstackConfig,
   {
-    name: 'tanstack/temp',
+    name: '@reconjs-root',
     plugins: {
       cspell: pluginCspell,
     },
@@ -37,9 +37,14 @@ export default [
           },
         },
       ],
+      '@typescript-eslint/naming-convention': 'warn',
       '@typescript-eslint/no-empty-function': 'off',
+      '@typescript-eslint/no-unnecessary-condition': 'warn',
       '@typescript-eslint/no-unsafe-function-type': 'off',
+      '@typescript-eslint/array-type': 'warn',
+      'import/order': 'warn',
       'no-case-declarations': 'off',
+      'sort-imports': 'warn',
     },
   },
   {
