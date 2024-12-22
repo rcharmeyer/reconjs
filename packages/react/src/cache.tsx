@@ -1,9 +1,11 @@
 import React from "react"
 import { cache as compatible_cache } from "./promises"
 
-let cache: typeof React.cache
+let cache: <T extends Function>(fn: T) => T
 
+// @ts-expect-error
 if (React.cache) {
+	// @ts-expect-error
 	cache = React.cache
 }
 else {

@@ -1,4 +1,4 @@
-import { Usable } from "react";
+import { Context } from "react"
 import { resolveDispatcher } from "./react-internals"
 import { theRoot } from "./root"
 import { createCache, createSymbolizer } from "./symbolizer"
@@ -24,7 +24,10 @@ export function cache <F extends Function> (loader: F): F {
 	return getPromise
 }
 
+// @ts-expect-error
 const REACT_CONTEXT_TYPE = theRoot.$$typeof
+
+type Usable <T> = PromiseLike <T> | Context <T>
 
 /**
  * This is a backwards-compatible version of React's `use`.
@@ -35,6 +38,7 @@ const REACT_CONTEXT_TYPE = theRoot.$$typeof
 export function use<T> (usable: Usable<T>): T {
 	if (null !== usable && "object" === typeof usable) {
 		const { readContext } = resolveDispatcher()
+		// @ts-expect-error
 		if ("function" === typeof usable.then) {
 			return readFuture (usable as PromiseLike<T>)
 		}

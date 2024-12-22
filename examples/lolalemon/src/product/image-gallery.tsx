@@ -1,16 +1,15 @@
-import { use, useMemo } from 'react'
-import { defineContext } from '@reconjs/react'
+import { useContext, useMemo } from 'react'
+import { defineContext, use } from '@reconjs/react'
 
 import { loadImages } from './queries'
 import { theColorState } from './color-selector'
 import { theProduct } from './context'
 
 const theActiveImage = defineContext (() => {
-	const product = use (theProduct)
+	const product = useContext (theProduct)
 	const images = use (loadImages (product))
 
-
-	const { color } = use (theColorState)
+	const { color } = useContext (theColorState)
 	return useMemo (() => {
 		return images[color] ?? null
 	}, [ color ])

@@ -1,14 +1,16 @@
 import React from "react"
 import { use as compatible_use } from "./promises"
 
-let use: typeof React.use
+let use: typeof compatible_use
 
+// @ts-ignore
 if (React.use) {
+	// @ts-ignore
 	use = React.use
 }
-// @ts-expect-error
+// @ts-ignore
 else if (React.experimental_use) {
-	// @ts-expect-error
+	// @ts-ignore
 	use = React.experimental_use
 }
 else {

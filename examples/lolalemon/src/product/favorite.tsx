@@ -1,5 +1,5 @@
-import { use, useCallback, useState } from "react"
-import { defineContext, setDisplayNames } from "@reconjs/react"
+import { useCallback, useState } from "react"
+import { use, defineContext, setDisplayNames } from "@reconjs/react"
 import { theProduct } from "./context"
 
 const theFavoritingStates = defineContext (() => {

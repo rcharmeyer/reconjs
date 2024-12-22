@@ -3,19 +3,6 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "exports": {
-    ".": {
-      "import": {
-        "types": "./build/modern/index.d.ts",
-        "default": "./build/modern/index.js"
-      },
-      "require": {
-        "types": "./build/modern/index.d.cts",
-        "default": "./build/modern/index.cjs"
-      }
-    },
-    "./package.json": "./package.json"
-  },
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",

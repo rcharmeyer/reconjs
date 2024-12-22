@@ -1,10 +1,9 @@
 import React, { 
 	ComponentType, 
-	createContext, 
+	createContext,
 	memo, 
 	MemoExoticComponent, 
 	PropsWithChildren,
-	useMemo,
 } from "react"
 import { use } from "./use"
 import { createCache } from "./symbolizer"
@@ -72,10 +71,8 @@ export function defineContext <T extends AnyDefined> (
 	const MemoizedContext = memo (HoistedContext)
 
 	function HoistedProvider (props: PropsWithChildren) {
-		const inContexts = useMemo (() => {
-			return deps
-				.every (ctx => use (ctx) !== undefined)
-		}, [])
+		const inContexts = deps
+			.every (ctx => use (ctx) !== undefined)
 
 		if (!inContexts) return props.children
 
