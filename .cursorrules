@@ -1,0 +1,140 @@
+# This is the ReconJS monorepo
+
+The monorepo is structured as such:
+
+- The `packages` folder contains all of the libraries that will be published on NPM.
+- The `examples` folder contains sample projects that use ReconJS packages.
+- The `scripts` folder contains helper files for building and publishing the libraries.
+
+## Rules for `packages`
+
+- All packages must be written in TypeScript.
+- Most (but not all) packages will be React packages; as much as possible, packages should be compatible with React 18, React 19, Server Components, React Native and the browser.
+- Packages should be agnostic of NodeJS vs Bun vs Deno, etc.
+
+## Rules for `examples`
+
+- Example projects should be written in TypeScript.
+- Example projects should use a specific version of React.
+- Example projects should show how ReconJS packages can be used.
+- Example web projects should support TailwindCSS.
+- Example React Native projects should use Expo.
+- Example projects should be runnable from root with `pnpm run <example-name>`.
+
+## Rules for writing React code
+
+- Any time mock data is created in non-testing code (like when creating a rough draft of anew component), it should be wrapped in an async function. The purpose of this rule is that we want to force ourselves to generate code that is somewhat realistic, even when it's just a rough draft.
+- When using React 18, import `use` from `@reconjs/react` instead of React.
+- All Contexts should be named with a `the` prefix.
+- All Contexts that with `the` prefix should be passed to `setDisplayNames`.
+- Never use `theContext.Provider` as a JSX element. Instead use Recon's `Provider` component.
+
+## Instructions for using `@reconjs/react`
+
+To use `@reconjs/react`, you must add the following at the root of your project:
+
+```tsx
+import { RootProvider } from "@reconjs/react"
+
+function App () {
+  return (
+    <StrictMode>
+      <RootProvider>
+        ...
+      </RootProvider>
+    </StrictMode>
+  )
+}
+```
+
+### The `Provider` Component
+
+To get better performance out of React Contexts you can just use Recon's `Provider` component!
+
+```tsx
+import { Provider } from "@reconjs/react"
+import { NameInput } from "..."
+
+const theTask = createContext <string> (undefined as any)
+
+function TaskForm (props: { id: string }) {
+  return (
+    <Provider context={theTask} value={props.id}>
+      <NameInput />
+      ...
+    </Provider>
+  )
+}
+```
+
+### Creating a Context
+
+Recon also provides a simpler utility for creating Contexts.
+
+```tsx
+import { createContext } from "@reconjs/react"
+const theTask = createContext<string>()
+```
+
+and a utility for setting display names...
+
+```tsx
+import { setDisplayNames } from "@reconjs/react"
+setDisplayNames ({ theTask })
+```
+
+### Automatically Managed Contexts
+
+Recon also provides a utility for creating Contexts that are automatically managed by Recon and don't need to be provided.
+
+```jsx
+import { defineContext } from "@reconjs/react"
+
+// theNameState never needs to be provided
+const theNameState = defineContext (() => {
+  const [ name, setName ] = useState ("")
+  return { name, setName }
+}, [ theTask ])
+
+export function NameInput() {
+  const { name, setName } = useContext (theNameState)
+  return (
+    <input 
+      value={name} 
+      onChange={(e) => setName (e.target.value)} 
+    />
+  )
+}
+```
+
+### `cache` lets us fetch data
+
+React 19 introduced `cache` but only for Server Components. The ReconJS version works on the client too.
+
+```tsx
+import { use } from "@reconjs/react"
+import { cache, defineContext } from "@reconjs/react"
+
+const loadTask = cache (async (id: string) => {
+  const response = await fetch (`/api/tasks/${id}`)
+  return response.json()
+})
+
+const theNameState = defineContext (() => {
+  const data = use (loadTask (id))
+  // ...
+}, [ theTask ])
+```
+
+### `use` lets us use a hook
+
+For compatibility with React 18, ReconJS stubs out React 19's `use` hook.
+
+```tsx
+import { use, defineContext } from "@reconjs/react"
+
+const theNameState = defineContext (() => {
+  const data = use (loadTask (id))
+  // ...
+}, [ theTask ])
+```
