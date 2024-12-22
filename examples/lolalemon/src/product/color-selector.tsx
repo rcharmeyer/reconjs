@@ -1,5 +1,5 @@
-import { use, useState } from 'react'
-import { defineContext } from '@reconjs/react'
+import { useState } from 'react'
+import { use, defineContext, setDisplayNames } from '@reconjs/react'
 import { Color, loadColors } from './queries'
 import { theProduct } from './context'
 
@@ -10,7 +10,7 @@ export const theColorState = defineContext (() => {
 	return { color, setColor }
 }, [ theProduct ])
 
-theColorState.displayName = "theColorState"
+setDisplayNames ({ theColorState })
 
 function ColorSelectorItem (props: { color: Color }) {
 	const { setColor } = use (theColorState) ?? {}

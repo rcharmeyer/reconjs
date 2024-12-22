@@ -1,23 +1,15 @@
-import { createCache, createSymbolizer } from "./symbolizer"
+import React from "react"
+import { cache as compatible_cache } from "./promises"
 
-type Fanc <T = any, A extends any[] = any[]> = (...args: A) => Promise <T>
+let cache: <T extends Function>(fn: T) => T
 
-const getPromiseRef = createCache ((_: symbol) => {
-	return {} as {
-		current?: Promise <any>
-	}
-})
-
-export function cache <F extends Fanc> (loader: F): F {
-	const getSymbol = createSymbolizer()
-
-	function getPromise (...args: any[]) {
-		const symbol = getSymbol (...args)
-
-		const ref = getPromiseRef (symbol)
-		ref.current ??= loader (...args)
-		return ref.current
-	}
-
-	return getPromise as any
+// @ts-expect-error
+if (React.cache) {
+	// @ts-expect-error
+	cache = React.cache
 }
+else {
+	cache = compatible_cache
+}
+
+export { cache }
