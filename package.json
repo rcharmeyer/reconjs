@@ -36,7 +36,7 @@
     "docs:generate": "node scripts/generateDocs.js",
     "cipublish": "node scripts/publish.js",
     "lolalemon": "nx dev lolalemon",
-    "publish:react": "pnpm run build && nx publish react"
+    "publish:react": "pnpm run build && nx publish @reconjs/react"
   },
   "devDependencies": {
     "@arethetypeswrong/cli": "^0.15.3",
