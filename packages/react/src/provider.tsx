@@ -2,6 +2,7 @@
 import { Context, memo } from "react"
 import { dependentsOf } from "./define-context"
 
+// TODO: Sort Providers based on their dependencies.
 export function Provider <C extends Context<any>> (props: {
 	children: React.ReactNode,
 	context: C,

@@ -1,4 +1,4 @@
-import { useCallback, useState } from "react"
+import { useCallback, useContext, useState } from "react"
 import { use, defineContext, setDisplayNames } from "@reconjs/react"
 import { theProduct } from "./context"
 
@@ -21,8 +21,8 @@ const theFavoritingStates = defineContext (() => {
 }, [])
 
 export const theFavoritingState = defineContext (() => {
-	const { favorites, addFavorite, removeFavorite } = use (theFavoritingStates)
-	const product = use (theProduct)
+	const { favorites, addFavorite, removeFavorite } = useContext (theFavoritingStates)
+	const product = useContext (theProduct)
 
 	const onFavorite = useCallback (() => {
 		addFavorite (product)

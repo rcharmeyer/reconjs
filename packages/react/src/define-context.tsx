@@ -1,5 +1,7 @@
 import React, { 
 	ComponentType, 
+	Context, 
+	ContextType, 
 	createContext,
 	memo, 
 	MemoExoticComponent, 
@@ -39,23 +41,23 @@ export const dependentsOf = createCache ((_: Ctx) => {
 	}
 })
 
-export function defineContext <T extends AnyDefined> (
-	useContextValue: () => T,
+export function handleContext <C extends Context <AnyDefined>> (
+	context: C,
+	useContextValue: () => ContextType <C>,
 	deps: Ctx[],
 ) {
 	if (isRSC()) {
-		throw new Error ("defineContext must be called in a client component.")
+		throw new Error ("handleContext must be called in a client component.")
 	}
 
 	deps = [ theRoot, ...deps ]
 	for (const dep of deps) {
 		// @ts-expect-error
 		if (dep.defaultValue !== undefined) {
-			console.warn ("defineContext expects all dependencies to have undefined default values.")
+			// console.warn ("handleContext expects all dependencies to have undefined default values.")
 		}
 	}
 
-	const context = createContext <T> (undefined as any)
 	const ContextProvider = memo (context.Provider)
 
 	function HoistedContext (props: PropsWithChildren) {
@@ -87,6 +89,17 @@ export function defineContext <T extends AnyDefined> (
 	for (const dep of deps) {
 		dependentsOf (dep).add (MemoizedProvider)
 	}
+}
 
+export function defineContext <T extends AnyDefined> (
+	useContextValue: () => T,
+	deps: Ctx[],
+) {
+	if (isRSC()) {
+		throw new Error ("defineContext must be called in a client component.")
+	}
+
+	const context = createContext <T> (undefined as any)
+	handleContext (context, useContextValue, deps)
 	return context
 }

@@ -1,5 +1,5 @@
-import { Context } from "react"
-import { resolveDispatcher } from "./react-internals"
+import React, { Context } from "react"
+import { isRSC, resolveDispatcher } from "./react-internals"
 import { theRoot } from "./root"
 import { createCache, createSymbolizer } from "./symbolizer"
 
@@ -8,6 +8,29 @@ const getPromiseRef = createCache ((_: symbol) => {
 		current?: Promise <any>
 	}
 })
+
+export function usePending <T> (promise: PromiseLike <T>): boolean {
+	const future = asFuture (promise)
+
+	function checkPending() {
+		// @ts-expect-error
+		return future.status === "pending"
+	}
+
+	if (isRSC()) return checkPending()
+
+	const [ , setPending ] = React.useState (checkPending())
+
+	React.useEffect (() => {
+		console.log ("usePending")
+		setPending (checkPending())
+		future.then (() => {
+			setPending (checkPending())
+		})
+	}, [ future ])
+
+	return checkPending()
+}
 
 export function cache <F extends Function> (loader: F): F {
 	const getSymbol = createSymbolizer()
@@ -100,4 +123,11 @@ function doReject (future: Future <any>) {
 		future.status = "rejected"
 		future.reason = reason
 	}
+}
+
+export function fulfilled <T> (value: T): Future <T> {
+	const future: any = Promise.resolve (value)
+	future.status = "fulfilled"
+	future.value = value
+	return future
 }

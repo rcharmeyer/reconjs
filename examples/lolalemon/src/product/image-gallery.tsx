@@ -1,23 +1,44 @@
-import { useContext, useMemo } from 'react'
-import { defineContext, use } from '@reconjs/react'
+import { useContext } from 'react'
+import { cache, createContext, defineContext, setDisplayNames, use, usePending } from '@reconjs/react'
 
-import { loadImages } from './queries'
 import { theColorState } from './color-selector'
-import { theProduct } from './context'
+import { Color, theProduct } from './context'
+
+function getImageUrl (color: Color) {
+	return `https://picsum.photos/id/${color}/200/300`
+}
+
+async function timeout (ms: number) {
+	return new Promise (resolve => setTimeout (resolve, ms))
+}
+
+export const theImageLoader = createContext (cache (async (color: Color) => {
+	console.log ("[default] loading image for", color)
+	await timeout (5000)
+	return getImageUrl (color)
+}))
 
 const theActiveImage = defineContext (() => {
-	const product = useContext (theProduct)
-	const images = use (loadImages (product))
-
 	const { color } = useContext (theColorState)
-	return useMemo (() => {
-		return images[color] ?? null
-	}, [ color ])
+	const loadImage = useContext (theImageLoader)
+
+	const _image = loadImage (color)
+	const isPending = usePending (_image)
+	return isPending ? null : use (_image)
 }, [ theProduct ])
 
-theActiveImage.displayName = "theActiveImage"
-
-export function ImageGallery () {
-	const image = use (theActiveImage)
+function ImageInner () {
+	const image = useContext (theActiveImage)
+	if (image === null) {
+		return <div>Loading...</div>
+	}
 	return <img src={image} alt="Product" />
 }
+
+export function ImageGallery () {
+	return (
+		<ImageInner />
+	)
+}
+
+setDisplayNames ({ theActiveImage, theImageLoader })
