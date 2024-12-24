@@ -1,6 +1,6 @@
 export { cache } from "./cache"
 export { createContext } from "./create-context"
-export { defineContext, handleContext } from "./define-context"
+export { defineContext } from "./define-context"
 export { setDisplayNames} from "./display-names"
 export { usePending } from "./promises"
 export { Provider } from "./provider"
