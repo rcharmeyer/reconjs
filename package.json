@@ -35,6 +35,7 @@
     "prettier:write": "pnpm run prettier --write",
     "docs:generate": "node scripts/generateDocs.js",
     "cipublish": "node scripts/publish.js",
+    "bluesky": "nx start bluesky",
     "lolalemon": "nx dev lolalemon",
     "nx:build:react": "nx build @reconjs/react",
     "nx:publish:react": "nx publish-it @reconjs/react"
