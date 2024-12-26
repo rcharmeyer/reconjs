@@ -1,3 +1,4 @@
+export { createBoundary } from "./boundary"
 export { cache } from "./cache"
 export { createContext } from "./create-context"
 export { defineContext } from "./define-context"
@@ -8,3 +9,6 @@ export { RootProvider } from "./root-provider"
 export { useLoader } from "./use-loader"
 export { use } from "./use"
 export { withProviders } from "./with-providers"
+export { withStyle } from "./with-style"
+
+export type { Component, PropsOf, StyleOf } from "./types"
