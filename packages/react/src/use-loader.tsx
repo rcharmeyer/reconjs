@@ -1,28 +1,26 @@
 import { useRef } from "react"
-import { fulfilled } from "./promises"
+import { asFuture, fulfilled } from "./promises"
+import { useConstant } from "./use-constant"
 
-type AnySyncFunction = (...args: any[]) => Exclude <any, Promise <any>>
+type Func = (...args: any[]) => any
 
-const NEVER = {} as any
+type PromiseOf <T> = T extends Promise <any> ? T : Promise <T>
 
-function useConstant <T> (fn: () => T) {
-	const ref = useRef <T> (NEVER)
-	if (ref.current === NEVER) {
-		ref.current = fn()
-	}
-	return ref.current
-}
+// TODO: Better caching.
+export function useLoader <T extends Func> (loader: T) {
+	type P = Parameters <T>
+	type R = (...args: P) => PromiseOf <ReturnType <T>>
 
-export function useLoader <T extends AnySyncFunction> (
-	loader: T
-): (...args: Parameters <T>) => Promise <ReturnType <T>> {
-	const loaderRef = useRef <AnySyncFunction> (loader)
+	const loaderRef = useRef <Func> (loader)
 	loaderRef.current = loader
 
 	function load (...args: any[]) {
 		const value = loaderRef.current (...args)
+		if (value instanceof Promise) {
+			return asFuture (value)
+		}
 		return fulfilled (value)
 	}
 
-	return useConstant <any> (() => load)
+	return useConstant (() => load as R)
 }

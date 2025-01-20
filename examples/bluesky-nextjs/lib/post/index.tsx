@@ -1,5 +1,3 @@
-import { StyleSheet, View } from "react-native"
-
 import { PostHeader } from "./header"
 import { PostBody } from "./body"
 import { PostAvatar } from "./avatar"
@@ -7,19 +5,11 @@ import { PostFooter } from "./footer"
 import { PostLayout } from "./layout"
 import { PostReason } from "./reason"
 
-const styles = StyleSheet.create ({
-  line: {
-    width: 2,
-    backgroundColor: "gray",
-    height: "100%",
-  },
-})
-
 function ReplyLine (props: {
   show?: boolean,
 }) {
   if (!props.show) return null
-  return <View style={styles.line} />
+  return <div className="w-2 bg-gray-500 h-full" />
 }
 
 export function Post (props: {

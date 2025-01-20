@@ -1,19 +1,6 @@
 import React from "react"
 import { isRSC } from "./react-internals"
-
-const NEVER = {} as any
-
-function useConstant <T> (init: () => T): T {
-	if (isRSC()) {
-		return init ()
-	}
-
-	const ref = React.useRef <T> (NEVER)
-	if (ref.current === NEVER) {
-		ref.current = init ()
-	}
-	return ref.current
-}
+import { useConstant } from "./use-constant"
 
 export function useRerender () {
 	if (isRSC()) {

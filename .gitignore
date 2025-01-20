@@ -45,3 +45,6 @@ temp
 
 vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
+
+# generated
+diagram.mmd

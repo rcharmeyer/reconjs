@@ -1,3 +1,5 @@
+"use client"
+
 import { Provider } from "./provider"
 import { theRoot } from "./root"
 

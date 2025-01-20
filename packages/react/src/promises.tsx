@@ -1,4 +1,4 @@
-import React, { Context } from "react"
+import React, { Context, useMemo } from "react"
 import { isRSC, resolveDispatcher } from "./react-internals"
 import { theRoot } from "./root"
 import { createCache, createSymbolizer } from "./symbolizer"
@@ -98,7 +98,7 @@ function readFuture <T> (promise: PromiseLike <T>): T {
 	}
 }
 
-function asFuture <T extends PromiseLike <any>> (promise: T): T {
+export function asFuture <T extends PromiseLike <any>> (promise: T): T {
 	if (promise.hasOwnProperty ("status")) {
 		return promise
 	}
@@ -125,9 +125,38 @@ function doReject (future: Future <any>) {
 	}
 }
 
-export function fulfilled <T> (value: T): Future <T> {
+export function fulfilled <T> (value: T): Promise <T> {
 	const future: any = Promise.resolve (value)
 	future.status = "fulfilled"
 	future.value = value
 	return future
+}
+
+function rejected <T> (reason: any): Promise <T> {
+	const future: any = Promise.reject (reason)
+	future.status = "rejected"
+	future.reason = reason
+	return future
+}
+
+export function usePromise <T> (loader: () => T|Promise<T>, deps: any[]): Promise <T> {
+	return useMemo (() => {
+		try {
+			const result = loader()
+			if (result instanceof Promise) {
+				return asFuture (result)
+			}
+			else {
+				return fulfilled (result)
+			}
+		}
+		catch (thrown) {
+			if (thrown instanceof Promise) {
+				return asFuture (thrown)
+			}
+			else {
+				return rejected (thrown)
+			}
+		}
+	}, deps)
 }

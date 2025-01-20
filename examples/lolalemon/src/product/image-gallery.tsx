@@ -1,5 +1,5 @@
-import { useContext } from 'react'
-import { cache, createContext, defineContext, setDisplayNames, use, usePending } from '@reconjs/react'
+import { createContext, useContext } from 'react'
+import { cache, defineContext, setDisplayNames, use, usePending } from '@reconjs/react'
 
 import { theColorState } from './color-selector'
 import { Color, theProduct } from './context'
@@ -36,9 +36,7 @@ function ImageInner () {
 }
 
 export function ImageGallery () {
-	return (
-		<ImageInner />
-	)
+	return <ImageInner />
 }
 
 setDisplayNames ({ theActiveImage, theImageLoader })

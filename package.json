@@ -35,10 +35,12 @@
     "prettier:write": "pnpm run prettier --write",
     "docs:generate": "node scripts/generateDocs.js",
     "cipublish": "node scripts/publish.js",
+    "bluesky-nextjs": "nx dev bluesky-nextjs",
     "bluesky": "nx start bluesky",
     "lolalemon": "nx dev lolalemon",
     "nx:build:react": "nx build @reconjs/react",
-    "nx:publish:react": "nx publish-it @reconjs/react"
+    "nx:publish:react": "nx publish-it @reconjs/react",
+    "nx:diagram:lolalemon": "nx diagram lolalemon"
   },
   "devDependencies": {
     "@arethetypeswrong/cli": "^0.15.3",

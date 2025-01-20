@@ -1,5 +1,5 @@
-import { memo, useMemo } from "react"
-import { Component, StyleOf } from "./types"
+import { ComponentType, memo, useMemo } from "react"
+import { StyleOf } from "./types"
 
 type AnyFunction = (...args: any[]) => any
 
@@ -8,7 +8,8 @@ function arrayify <T> (value: T): T[] {
 	return Array.isArray (value) ? value : [ value ]
 }
 
-export function withStyle <C extends Component> (
+
+export function withStyle <C extends ComponentType<any>> (
 	component: C,
 	defaultStyle: Exclude <StyleOf <C>, AnyFunction|any[]>
 ) {
@@ -16,7 +17,7 @@ export function withStyle <C extends Component> (
 		? memo (component)
 		: component
 
-	function getDisplayName () {
+	function getDisplayName() {
 		if (typeof component === "string") return component
 		return component.displayName ?? component.name ?? "Unknown"
 	}
@@ -25,7 +26,8 @@ export function withStyle <C extends Component> (
 		// @ts-expect-error
 		WithStyle.displayName ??= `withStyle(${getDisplayName()})`
 
-		const style = useMemo (() => {
+		const style: any = useMemo (() => {
+			// TODO: More sophisticated merging
 			return [ defaultStyle, ...arrayify (props.style) ]
 		}, [ props.style ])
 

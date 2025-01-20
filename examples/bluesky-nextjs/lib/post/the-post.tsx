@@ -1,7 +1,7 @@
 import { AppBskyFeedDefs } from "@atproto/api"
 import { defineContext, useLoader } from "@reconjs/react"
 
-type PostView = AppBskyFeedDefs.PostView
+type PostView = AppBskyFeedDefs.FeedViewPost
 
 async function fetchPost (post: string): Promise <PostView> {
 	throw new Error ("Post not found")
